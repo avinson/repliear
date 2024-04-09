@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Force-redirect every HTTP request to HTTPS
 function forceHTTPS(req: NextRequest) {
   if (
-    process.env.NODE_ENV === "production" &&
+    process.env.NODE_ENV === "test" &&
     req.headers.get("x-forwarded-proto") !== "https" &&
     !req.headers.get("host")?.includes("localhost")
   ) {
