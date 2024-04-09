@@ -91,8 +91,7 @@ export default function AboutModal({ isOpen, onDismiss }: Props) {
           className="text-sm font-normal text-gray-100"
         >
           <Feature title="Dataset">
-            The entire React issue db as of April 2022. ~11k issues, ~50 MB of
-            data.
+            Tracking my progress on the Wiz Technical Test.
           </Feature>
           <Feature title="Spinner-free">
             Everything in the UI responds instantly, without progress bars.
