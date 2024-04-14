@@ -6,6 +6,7 @@ RUN apt-get -qy update && apt-get install -qy \
     btop \
     fish \
     htop \
+    jq \
     kubernetes-client \
     less \
     neovim \
