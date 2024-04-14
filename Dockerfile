@@ -1,15 +1,26 @@
 FROM node:18
 
-# install packages that are nice for dev environment, cairo build deps cribbed from: https://github.com/QuantEcon/docker/blob/master/all-julia/Dockerfile
+ENV KUBECTL_VERSION="1.29"
+
+# install packages that are nice to have
 RUN apt-get -qy update && apt-get install -qy \
+apt-transport-https \
     awscli \
     btop \
+    ca-certificates \
     fish \
     htop \
     jq \
-    kubernetes-client \
     less \
-    neovim \
+    neovim
+
+# install kubectl
+RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v${KUBECTL_VERSION}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
+    && chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v${KUBECTL_VERSION}/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list \
+    && chmod 644 /etc/apt/sources.list.d/kubernetes.list \
+    && apt-get -qy update && apt-get install -qy \
+    kubectl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
